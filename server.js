@@ -1,7 +1,7 @@
 import app from './src/app.js';
 
-const port = 3000;
+const PORT = 3010 || 3011;
 
-app.listen(port, () => {
-  console.log(`🚀 [ONLINE] - API Preço da Hora v1.2 -> http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`ONLINE -> http://localhost:${PORT}`);
 });

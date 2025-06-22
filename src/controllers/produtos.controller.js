@@ -20,17 +20,20 @@ export async function getSugestao(req, res) {
 export async function getProdutoPorGtin(req, res) {
   try {
     const { gtin, latitude, longitude } = req.params;
+
     const {
       horas = 72,
       raio = 15,
       precomax = 0,
       precomin = 0,
-      ordenar = 'preco.asc',
+      ordenar = "preco.asc",
       pagina = 1,
     } = req.query;
 
     if (!gtin || !latitude || !longitude) {
-      return res.status(400).json({ error: 'GTIN, latitude e longitude são obrigatórios' });
+      return res
+        .status(400)
+        .json({ error: "GTIN, latitude e longitude são obrigatórios" });
     }
 
     const response = await precoService.produto({
@@ -46,11 +49,16 @@ export async function getProdutoPorGtin(req, res) {
     });
 
     if (response?.data?.codigo === 80) {
+      console.log("Dados do produto:", response.data);
+
       res.json(response.data.resultado);
     } else {
-      console.warn("⚠️ Dados inválidos ou vazios no retorno de produto:", response.data);
+      console.warn(
+        "⚠️ Dados inválidos ou vazios no retorno de produto:",
+        response.data
+      );
       console.error("Erro ao buscar produto:", response.data);
-      res.status(500).json({ error: 'Erro ao buscar produto'  });
+      res.status(500).json({ error: "Erro ao buscar produto" });
     }
   } catch (error) {
     console.error("Erro ao buscar produto:", error);

@@ -124,7 +124,7 @@ async function montarCesta() {
   };
 }
 
-router.get("/", async (req, res) => {
+router.get("/cesta", async (req, res) => {
   try {
     const resultado = await montarCesta();
     res.json(resultado);
@@ -138,5 +138,7 @@ router.get("/", async (req, res) => {
     });
   }
 });
+
+// Montar a minha cesta no sqlite
 
 export default router;
